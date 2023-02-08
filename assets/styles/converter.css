@@ -1,0 +1,18 @@
+header{
+    background: rgb(133, 48, 173);
+    color: rgb(202, 189, 209);
+    width: 100%;
+    text-align: center;
+}
+
+body{
+    margin: 0;
+}
+
+.main-headline{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container{
+    display: flex;
+}

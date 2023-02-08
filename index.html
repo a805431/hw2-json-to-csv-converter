@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8" />
-    <title></title>
+    <title>Converter</title>
 </head>
+<link rel="stylesheet" href="assets/styles/converter.css"/>
 <body>
     <header>
-        <h1></h1>
+        <h1 class="main-headline">Welcome to the JSON-to-CSV Converter</h1>
     </header>
+    <div class="container">
+        <section id="json-side">
+            <input type="text" id="json-format-input"/>
+        </section>
+        <button type="button" id="btn-convert-json-to-csv"></button>
+        <section id="csv-side">
+            <input type="text" id="csv-format-output"/>
+        </section>
+    </div>
 </body>
 </html>
