@@ -4,6 +4,7 @@
     <title>Converter</title>
 </head>
 <link rel="stylesheet" href="assets/styles/converter.css"/>
+<script src="assets/scripts/converter.js" defer></script>
 <body>
     <header>
         <h1 class="main-headline">Welcome to the JSON-to-CSV Converter</h1>
@@ -11,9 +12,11 @@
     <div class="container">
         <section id="json-side">
             <textarea id="json-format-input"></textarea>
+            <button type="button" id="btn-format-json-text">Format</button>
         </section>
         <section id="btn-side">
             <button type="button" id="btn-convert-json-to-csv">Convert</button>
+            <button type="button" id="btn-clear-json-and-csv">Clear</button>
         </section>
         <section id="csv-side">
             <textarea id="csv-format-output"></textarea>
