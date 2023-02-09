@@ -85,7 +85,6 @@ body{
 f#format-btn-container{
     display: flex;
     flex-direction: row;
-
 }
 
 #btn-format-json-text{
