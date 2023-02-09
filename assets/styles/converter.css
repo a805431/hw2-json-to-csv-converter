@@ -1,18 +1,43 @@
 header{
-    background: rgb(133, 48, 173);
-    color: rgb(202, 189, 209);
+    background: rgb(116, 207, 55);
+    color: rgb(194, 47, 47);
+    height: 150px;
     width: 100%;
     text-align: center;
+    margin: 0 0 50px
 }
 
 body{
     margin: 0;
 }
 
+/*h1*/
 .main-headline{
     font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin: 0;
+    line-height: 150px;
 }
 
 .container{
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; 
+    column-gap: 50px;
+}
+
+#json-format-input, #csv-format-output{
+    height: 500px;
+    width: 350px;
+    border: 2px solid rgb(75, 138, 34);
+    border-radius: 5px;
+    box-sizing: border-box;
+    resize: none;
+}
+
+#btn-convert-json-to-csv{
+    height: 100px;
+    width: 100px;
+    padding: 20px;
 }
