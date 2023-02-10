@@ -8,23 +8,27 @@ const clearBtn = document.getElementById('btn-clear-json-and-csv');
 const formatBtn = document.getElementById('btn-format-json-text');
 
 //patterns
-const jsonPattern = /\"\w*\"\:((\"\w*\")|\d+|false|true|null)/;
+//base pattern
+const baseJsonPattern = /\"\w*\"\:\s?((\"\w*\")|\d+|false|true|null)/g;
+const objectJsonPattern = /\{\s*\"\w*\"\:\s?((\"\w*\")|\d+|false|true|null)\s*\}/g;
+const curlyBracePattern = /\{[^}]+\}/gm;
+const squareBracketsPattern = /\[[^]+\]/gm;
 
-// function validateJsonFormat(jsonContent){
-//     if(jsonContent){
-
-//     }
+// function fillCsvBoxWithJsonBoxContents(){
+//     const jsonBoxContent = jsonInput.value;
+//     csvOutput.value = jsonBoxContent;
 // }
 
-//това е пробно засега
-//пробвай нещо с map()
-function fillCsvBoxWithJsonBoxContents(){
+function validateJsonFormat(){
     const jsonBoxContent = jsonInput.value;
-    csvOutput.value = jsonBoxContent;
-}
+    let matchesArray = jsonBoxContent.match(squareBracketsPattern);
 
-function checkPattern(pattern){
-    if()
+    if(jsonBoxContent != "" && matchesArray != null){
+        alert("VALID!" + " " + matchesArray[0]);
+        alert("VALID!" + " " + matchesArray[0]);
+    }else{
+        alert("NOT VALID");
+    }
 }
 
 function clearJsonAndCsvBoxContents(){
@@ -32,6 +36,7 @@ function clearJsonAndCsvBoxContents(){
     csvOutput.value = "";
 }
 
-convertBtn.addEventListener('click', fillCsvBoxWithJsonBoxContents);
+convertBtn.addEventListener('click', validateJsonFormat);
 clearBtn.addEventListener('click', clearJsonAndCsvBoxContents);
+//formatBtn.addEventListener('click', fillCsvBoxWithJsonBoxContents);
 
