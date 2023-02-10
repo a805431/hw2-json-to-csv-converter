@@ -21,13 +21,24 @@ const squareBracketsPattern = /\[[^]+\]/gm;
 
 function validateJsonFormat(){
     const jsonBoxContent = jsonInput.value;
-    let matchesArray = jsonBoxContent.match(squareBracketsPattern);
+    let outerSquaresMatch = jsonBoxContent.match(squareBracketsPattern);
+    let objectPatternMatches = []; //масив от елементи със синтаксис на JSON обекти
 
-    if(jsonBoxContent != "" && matchesArray != null){
-        alert("VALID!" + " " + matchesArray[0]);
-        alert("VALID!" + " " + matchesArray[0]);
+    if(jsonBoxContent != "" && outerSquaresMatch != null){
+        alert("VALID INPUT!" + " " + outerSquaresMatch[0]);
+
+        for(let elem of outerSquaresMatch){
+            //първо на елементът трябва да му се премахнат квадратните скоби
+            const elemWithoutSquareBrackets = elem.slice(1, -1);
+
+            objectPatternMatches = elemWithoutSquareBrackets.match(curlyBracePattern);
+
+            if(objectPatternMatches != null){
+                alert("PUSHED ELEM IS: "+objectPatternMatches[0]);
+            }
+        }
     }else{
-        alert("NOT VALID");
+        alert("INVALID INPUT");
     }
 }
 
