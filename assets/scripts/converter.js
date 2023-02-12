@@ -9,7 +9,8 @@ const formatBtn = document.getElementById('btn-format-json-text');
 
 //patterns
 //base pattern
-const baseJsonPattern = /\"\w*\"\:\s?((\"\w*\")|\d+|false|true|null)/g;
+//const baseJsonPattern = /\"\w*\"\:\s?((\"\w*\")|\d+|false|true|null)/g;
+const baseJsonPattern = /\"\w*\"\:\s?((\"(\w|\s|-|,|\:)*\")|\d+|false|true|null)/g;
 const objectJsonPattern =
   /\{\s*\"\w*\"\:\s?((\"\w*\")|\d+|false|true|null)\s*\}/g;
 const curlyBracePattern = /\{[^}]+\}/gm;
@@ -35,6 +36,7 @@ function validateJsonFormat() {
   let outerSquaresMatch = jsonBoxContent.match(squareBracketsPattern);
   let objectPatternMatches = []; //масив от елементи със синтаксис на JSON обекти
   let separatedJSNObjectsAsStrings = [];
+  let javascriptObjects = [];
 
   if (jsonBoxContent != '' && outerSquaresMatch != null) {
     alert('VALID INPUT!' + ' ' + outerSquaresMatch[0]);
@@ -48,7 +50,7 @@ function validateJsonFormat() {
     }
 
     if (objectPatternMatches != null) {
-      alert('PUSHED ELEM IS: ' + objectPatternMatches[1]);
+     // alert('PUSHED ELEM IS: ' + objectPatternMatches[1]);
 
       for (let elem of objectPatternMatches) {
         const separatedJSNObject = removeBrackets(elem); //elem е един JSON обект с {}
@@ -56,7 +58,25 @@ function validateJsonFormat() {
        // array от стрингове с всеки елемент стринг, съдържащ двойки ключ стойност на един JSON обект
         separatedJSNObjectsAsStrings.push(separatedJSNObject);
         console.log(separatedJSNObject);
+
+        // const singleObject = {
+        //     [] = ;
+        // }
+        // javascriptObjects.push(singleObject);
       }
+    }
+
+    for(let elem of separatedJSNObjectsAsStrings){
+        if(elem != null){
+            let separatedJSONSingleStringsInOneObject = elem.split(',\n');
+            for(let elem of separatedJSONSingleStringsInOneObject){
+                console.log(elem);
+                if(baseJsonPattern.test(elem)){
+
+                }
+            }
+            console.log('-------END-OF-THIS-ENTRY--------');
+        }
     }
   } else {
     alert('INVALID INPUT');
