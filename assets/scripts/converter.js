@@ -72,7 +72,11 @@ function validateJsonFormat() {
             for(let elem of separatedJSONSingleStringsInOneObject){
                 console.log(elem);
                 if(baseJsonPattern.test(elem)){
-
+                    const newObjAttrAndVal = elem.split(':');
+                    const localObj = {
+                        [newObjAttrAndVal[0]] : newObjAttrAndVal[1]
+                    }
+                    javascriptObjects.push(localObj);
                 }
             }
             console.log('-------END-OF-THIS-ENTRY--------');
