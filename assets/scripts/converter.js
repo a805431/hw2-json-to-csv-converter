@@ -37,13 +37,14 @@ function createProperObject(elem){
 
     const localObj = {};
 
-    let separatedJSONSingleStringsInOneObject = elem.split(',\n');
+   // let separatedJSONSingleStringsInOneObject = elem.split(',\n');
+    let separatedJSONSingleStringsInOneObject = elem.match(baseJsonPattern);
     for (let el of separatedJSONSingleStringsInOneObject) { //el е един JSON стринг, т.е. една двойка ключ-стойност
-      if (baseJsonPattern.test(el)) {
+     // if (baseJsonPattern.test(el)) {
 
         const newObjAttrAndVal = el.split(':');
         localObj[newObjAttrAndVal[0]] = newObjAttrAndVal[1];
-      }
+     // }
     }
     console.log('NEWLY CREATED JS OBJECT: ', localObj);
     console.log('-------END-OF-THIS-ENTRY--------');
