@@ -11,7 +11,8 @@ const formatBtn = document.getElementById('btn-format-json-text');
 //base pattern
 //const baseJsonPattern = /\"\w*\"\:\s?((\"\w*\")|\d+|false|true|null)/g;
 const baseJsonPattern =
-  /\"\w*\"\:\s?((\"(\w|\s|-|,|\:)*\")|\d+|false|true|null)/g;
+//  /\"\w*\"\:\s?((\"(\w|\s|-|,|\:|\.)*\")|\d+|false|true|null)/g;
+  /\"\w*\"\:\s?((\"(.)*\")|\d+|false|true|null)/g;
 const objectJsonPattern =
   /\{\s*\"\w*\"\:\s?((\"\w*\")|\d+|false|true|null)\s*\}/g;
 const curlyBracePattern = /\{[^}]+\}/gm;
@@ -37,14 +38,12 @@ function createProperObject(elem){
 
     const localObj = {};
 
-   // let separatedJSONSingleStringsInOneObject = elem.split(',\n');
     let separatedJSONSingleStringsInOneObject = elem.match(baseJsonPattern);
     for (let el of separatedJSONSingleStringsInOneObject) { //el е един JSON стринг, т.е. една двойка ключ-стойност
-     // if (baseJsonPattern.test(el)) {
-
+        console.log(el);
         const newObjAttrAndVal = el.split(':');
         localObj[newObjAttrAndVal[0]] = newObjAttrAndVal[1];
-     // }
+    
     }
     console.log('NEWLY CREATED JS OBJECT: ', localObj);
     console.log('-------END-OF-THIS-ENTRY--------');
@@ -58,7 +57,7 @@ function validateJsonFormat() {
   let javascriptObjects = [];
 
   if (jsonBoxContent != '' && outerSquaresMatch != null) {
-    alert('VALID SQ INPUT!' + ' ' + outerSquaresMatch[0]); //outerSquaresMatch[0] e всичкото в квадратните скоби т.е. имаме само един елемент
+    //alert('VALID SQ INPUT!' + ' ' + outerSquaresMatch[0]); //outerSquaresMatch[0] e всичкото в квадратните скоби т.е. имаме само един елемент
 
     for (let elem of outerSquaresMatch) {
       //първо на елементът трябва да му се премахнат квадратните скоби
@@ -69,7 +68,7 @@ function validateJsonFormat() {
     }
 
     if (objectPatternMatches != null) {
-      alert('PUSHED CB ELEM IS: ' + objectPatternMatches[1]);
+      //alert('PUSHED CB ELEM IS: ' + objectPatternMatches[1]);
 
       for (let elem of objectPatternMatches) {
         const separatedJSNObject = removeBrackets(elem); //elem е един JSON обект с {}
@@ -77,14 +76,9 @@ function validateJsonFormat() {
         // array от стрингове с всеки елемент стринг, съдържащ двойки ключ стойност на един JSON обект
         separatedJSNObjectsAsStrings.push(separatedJSNObject);
         console.log(separatedJSNObject);
-
-        // const singleObject = {
-        //     [] = ;
-        // }
-        // javascriptObjects.push(singleObject);
       }
     }
-    alert('PUSHED NO {} ELEM IS: ' + separatedJSNObjectsAsStrings[0]);
+    //alert('PUSHED NO {} ELEM IS: ' + separatedJSNObjectsAsStrings[0]);
 
     if (separatedJSNObjectsAsStrings != null) {
       for (let elem of separatedJSNObjectsAsStrings) {
