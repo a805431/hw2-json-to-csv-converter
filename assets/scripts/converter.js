@@ -86,10 +86,19 @@ function validateJsonFormat() {
         javascriptObjects.push(javaScriptObject);
       }
     }
-    //return javascriptObjects;
+    return javascriptObjects;
   } else {
     alert('INVALID INPUT');
   }
+}
+
+function returnCSVString(){
+    const javascriptObjects = [];
+    javascriptObjects = validateJsonFormat();
+
+    // for ()
+    // const objKeys = 
+    // let csvString = 
 }
 
 function clearJsonAndCsvBoxContents() {
