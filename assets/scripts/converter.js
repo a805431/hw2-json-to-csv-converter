@@ -42,11 +42,12 @@ function createProperObject(elem){
     for (let el of separatedJSONSingleStringsInOneObject) { //el е един JSON стринг, т.е. една двойка ключ-стойност
         console.log(el);
         const newObjAttrAndVal = el.split(':');
-        localObj[newObjAttrAndVal[0]] = newObjAttrAndVal[1];
+        localObj[removeBrackets(newObjAttrAndVal[0])] = newObjAttrAndVal[1];
     
     }
     console.log('NEWLY CREATED JS OBJECT: ', localObj);
     console.log('-------END-OF-THIS-ENTRY--------');
+    return localObj;
 }
 
 function validateJsonFormat() {
@@ -86,6 +87,7 @@ function validateJsonFormat() {
         javascriptObjects.push(javaScriptObject);
       }
     }
+    //връща се Array от обекти
     return javascriptObjects;
   } else {
     alert('INVALID INPUT');
@@ -93,12 +95,29 @@ function validateJsonFormat() {
 }
 
 function returnCSVString(){
-    const javascriptObjects = [];
-    javascriptObjects = validateJsonFormat();
+    let javascriptObjects = [];
+    javascriptObjects = validateJsonFormat(); //javascriptObjects е Array от обекти
+    //взимат се JS обекти, чието съдържание трябва да се преобразува в стринг с формат на CSV
 
-    // for ()
-    // const objKeys = 
-    // let csvString = 
+    // let csvString = '';
+    // let objKeys = Object.keys(javascriptObjects[0]); //връща Array от ключовете в обекта
+    // csvString = csvString.concat(objKeys.join(), '\n');
+
+    // for (object of javascriptObjects){
+    //   let objValues = Object.values(object);
+    //   csvString = csvString.concat(objValues.join(), '\n');
+    // }
+
+    let csvString = [];
+    let objKeys = Object.keys(javascriptObjects[0]); //връща Array от ключовете в обекта
+    csvString.push(objKeys, '\n');
+
+    for (object of javascriptObjects){
+      let objValues = Object.values(object);
+      csvString.push(objValues, '\n');
+    }
+    
+    csvOutput.value = csvString;
 }
 
 function clearJsonAndCsvBoxContents() {
@@ -106,6 +125,6 @@ function clearJsonAndCsvBoxContents() {
   csvOutput.value = '';
 }
 
-convertBtn.addEventListener('click', validateJsonFormat);
+convertBtn.addEventListener('click', returnCSVString);
 clearBtn.addEventListener('click', clearJsonAndCsvBoxContents);
 //formatBtn.addEventListener('click', fillCsvBoxWithJsonBoxContents);
