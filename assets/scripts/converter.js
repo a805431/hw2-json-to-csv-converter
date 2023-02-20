@@ -28,7 +28,7 @@ function removeBrackets(singleArrayElement) {
   return result;
 }
 
-function doesMatchBaseJsonPattern(stringToBeMatched) {
+function matchesBaseJsonPattern(stringToBeMatched) {
   const booleanResult = stringToBeMatched.match(baseJsonPattern) != null;
   return booleanResult;
 }
@@ -37,11 +37,18 @@ function createProperObject(elem){
     //elem е САМО един JSON обект, без {}
 
     const localObj = {};
+    const regExp = /,/g;
 
     let separatedJSONSingleStringsInOneObject = elem.match(baseJsonPattern);
     for (let el of separatedJSONSingleStringsInOneObject) { //el е един JSON стринг, т.е. една двойка ключ-стойност
         console.log(el);
         const newObjAttrAndVal = el.split(':');
+
+        //тук се прави така, че запетйките вътре в дадената стойност срещу ключа да се приемат като символ, а не като разделител
+        if(newObjAttrAndVal[1].includes(',')){
+          newObjAttrAndVal[1] = newObjAttrAndVal[1].replace(regExp, '\,');
+        }
+
         localObj[removeBrackets(newObjAttrAndVal[0])] = newObjAttrAndVal[1];
     
     }
@@ -108,14 +115,19 @@ function returnCSVString(){
     //   csvString = csvString.concat(objValues.join(), '\n');
     // }
 
-    let csvString = [];
+    let csvString = '';
     let objKeys = Object.keys(javascriptObjects[0]); //връща Array от ключовете в обекта
-    csvString.push(objKeys, '\n');
+    //objKeys.map(objKey => csvString.push(objKey));
+    csvString += objKeys.join(';');
+    csvString += '\r\n';
 
     for (object of javascriptObjects){
-      let objValues = Object.values(object);
-      csvString.push(objValues, '\n');
+      let objValues = Object.values(object).map(item =>typeof item === 'string'? item.trim() : item);
+      //objValues.map(objValue => csvString.push(objValue));
+      csvString += objValues.join(';');
+      csvString += '\r\n';
     }
+    
     
     csvOutput.value = csvString;
 }
